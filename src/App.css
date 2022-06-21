@@ -1,0 +1,51 @@
+*{
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+.header{
+  position: relative;
+  top: 0;
+}
+
+nav{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 4rem;
+  background-color: rgb(252, 247, 247);
+}
+
+.ul-items{
+  list-style: none;
+  margin-right: 100px;
+}
+
+
+a{
+  font-weight: bold;
+  font-size: 18px;
+  text-decoration: none;
+  color: black;
+  margin: 0 1rem;
+}
+
+.logo{
+  margin-left: 10%;
+}
+
+.right-button{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-right: 3%;
+}
+
+button{
+  border: none;
+  background: none;
+  cursor: pointer;
+  margin: 0 1rem; 
+
+}
