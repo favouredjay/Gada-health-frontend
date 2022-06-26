@@ -14,13 +14,15 @@ const PatientLogIn = () => {
 
   const [state, setState] = useState({
     phone: "",
-    password: ""
+    password: "",
+    type: ""
   });
 
 
   const [error, setError] = useState({
     phone: false,
-    password: false
+    password: false,
+    type: false
   })
 
   const handlePhoneNumberError = () => {
@@ -48,7 +50,7 @@ const PatientLogIn = () => {
 
 
   useEffect(() => {
-    const { phone, password } = state;
+    const { phone, password, type } = state;
     if (phone === "" || password === "" || password.length < 1){
       setDisabled(true);
     }else{
@@ -116,6 +118,17 @@ const PatientLogIn = () => {
               <Typography color={'red'} sx={{ fontWeight: '400', fontSize: '15px' }}>
                     {showPasswordErrorText && "please enter a correct password"}
               </Typography>
+            </Box>
+
+            <Box>  
+              <TextField
+                id="standard-required"
+                label="type"
+                type="hidden"
+                variant="standard"
+                value= 'patient'
+                onChange={(e) => setState({...state, type: e.target.value})}
+              />
             </Box>
 
             <Typography> Do you have account ?

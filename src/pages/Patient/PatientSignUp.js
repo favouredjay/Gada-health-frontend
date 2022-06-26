@@ -5,7 +5,6 @@ import { Link, useNavigate  } from 'react-router-dom';
 import axios from 'axios';
 
 
-
 const Gender = [
   {
     value: 'Male',
@@ -16,20 +15,15 @@ const Gender = [
     value: 'Female',
     label: '2',
   },
-
-  {
-    value: 'Others',
-    label: '3',
-  },
 ];
 
 const  PatientSignUp = () => {
 
-  const [type, setType] = React.useState('Male');
+  // const [type, setType] = React.useState('Male');
 
-  const handleChange = (event) => {
-    setType(event.target.value);
-  };
+  // const handleChange = (event) => {
+  //   setType(event.target.value);
+  // };
 
   const navigate = useNavigate();
   const [disabled, setDisabled] = useState(false);
@@ -37,19 +31,27 @@ const  PatientSignUp = () => {
   const [showPhoneNumberError, setShowPhoneNumberError] = useState(false);
   const [showEmailErrorText, setShowEmailErrorText] = useState(false);
   const [showPasswordErrorText, setShowPasswordErrorText] = useState(false);
+  const [showDateError, setShowDateError] = useState(false);
+  const [showGenderError, setShowGenderError] = useState(false);
 
   const [state, setState] = useState({
     name: "",
     phone: "",
     email: "",
-    password: ""
+    password: "",
+    dob: "",
+    gender: "",
+    type:"in patient",
   });
 
   const [error, setError] = useState({
     name: false,
     phone: false,
     email: false,
-    password: false
+    password: false,
+    dob: false,
+    gender: false,
+    type: false,
   })
 
   const handleNameError = () => {
@@ -100,16 +102,37 @@ const  PatientSignUp = () => {
     }
   }
 
+  const handleDateError = () => {
+    var dateformat = /^(0[1-9]|1[0-2])\/(0[1-9]|1\d|2\d|3[01])\/(19|20)\d{2}$/; 
+    if (!state.dob.match(dateformat) && state.dob !== ""){
+        console.log(state.dob.match(dateformat));
+        setError({...error, dob: true});
+        setShowDateError(true);
+    }else {
+      setError({...error, dob: false});
+      setShowDateError(false);
+    }
+  }
+
+  const handleGenderError = () => {
+    var genderformat = '/^(?:m|M|male|Male|f|F|female|Female)$/m';
+    if (!state.gender.match(genderformat) && state.gender !== ""){
+        setError({...error, gender: true});
+        setShowGenderError(true);
+    }else {
+      setError({...error, gender: false});
+      setShowGenderError(false);
+    }
+  }
 
   useEffect(() => {
-    const { name, phone, email, password } = state;
-    if ( name === "" || phone === ""|| email === "" || password === "" || password.length < 1){
+    const { name, phone, email, password, dob, gender, type } = state;
+    if ( name === "" || phone === ""|| email === "" || password === "" || password.length < 1 || dob === "" || gender === ""){
       setDisabled(true);
     }else{
       setDisabled(false);
     }
   },[state]);
-
 
 
   const handleSubmit = async(e) => {
@@ -171,7 +194,6 @@ const  PatientSignUp = () => {
                 {showPhoneNumberError && "Enter a valid phone number"}
               </Typography>
             </Box>
-            
 
             <Box height=" 40px" width="340px" marginBottom='50px'>
               <TextField
@@ -212,8 +234,14 @@ const  PatientSignUp = () => {
                 type="date"
                 variant="standard"
                 helperText="Enter your date of birth"
+                value={state.dob}
+                onChange={(e) => setState({...state, dob: e.target.value})}
+                onBlur={handleDateError}
+                onFocus={() => setShowDateError(false)}
               />
-              
+              <Typography color={'red'} sx={{ fontWeight: '400', fontSize: '15px' }}>
+                {showDateError && "Enter correct date of birth"}
+              </Typography>  
             </Box>
 
             <Box height=" 40px" width="340px" marginBottom='50px'>
@@ -221,18 +249,34 @@ const  PatientSignUp = () => {
                     select
                     required
                     label="Gender"
-                    value={type}
-                    onChange={handleChange}
+                    //value={type}
+                    // onChange={handleChange}
                     helperText="Please select your gender"
+                    value={state.gender}
+                    onChange={(e) => setState({...state, gender: e.target.value})}
+                    onBlur={handleGenderError}
+                    onFocus={() => setShowGenderError(false)}
                     >
                     {Gender.map((option) => (
                         <MenuItem key={option.value} value={option.value}>
                              {option.value}
                         </MenuItem>
                     ))}
+                    
                 </TextField>
-                   
-
+                <Typography color={'red'} sx={{ fontWeight: '400', fontSize: '15px' }}>
+                    {showGenderError && "Enter correct gender"}
+                </Typography> 
+            </Box>
+            <Box>  
+              <TextField
+                id="standard-required"
+                label="type"
+                type="hidden"
+                variant="standard"
+                value= 'in patient'
+                onChange={(e) => setState({...state, type: e.target.value})}
+              />
             </Box>
 
             <Typography> 

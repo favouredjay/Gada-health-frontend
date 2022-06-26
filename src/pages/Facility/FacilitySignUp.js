@@ -8,33 +8,33 @@ import axios from 'axios';
 
 const FacilityType = [
     {
-      value: 'Hospital',
-      label: '1',
+      value: 'hospital',
+      label: 'Hospital',
     },
 
     {
-      value: 'Laboratory',
-      label: '2',
+      value: 'laboratory',
+      label: 'Laboratory',
     },
 
     {
-      value: 'Pharmacy',
-      label: '3',
+      value: 'pharmacy',
+      label: 'Pharmacy',
     },
 
     {
-      value: 'Home Care',
-      label: '4',
+      value: 'home Care',
+      label: 'Home Care',
     },
 
     {
-        value: 'X-ray',
-        label: '5',
+        value: 'x-ray',
+        label: 'X-ray',
 
     },
     {
-        value: 'Others',
-        label: '6',
+        value: 'others',
+        label: 'Others',
 
     },
   ];
@@ -42,28 +42,31 @@ const FacilityType = [
 
   const  FacilitySignUp = () => {
 
-    const [type, setType] = React.useState('Hospital');
+  //   const [type, setType] = React.useState('Hospital');
 
-  const handleChange = (event) => {
-    setType(event.target.value);
-  };
+  // const handleChange = (event) => {
+  //   setType(event.target.value);
+  // };
 
   const navigate = useNavigate();
   const [disabled, setDisabled] = useState(false);
   const [showNameErrorText, setShowNameErrorText] = useState(false);
   const [showEmailErrorText, setShowEmailErrorText] = useState(false);
   const [showPasswordErrorText, setShowPasswordErrorText] = useState(false);
+  const [showFacilityTypeError, setShowFacilityTypeError] = useState(false);
 
   const [state, setState] = useState({
     name: "",
     email: "",
-    password: ""
+    password: "",
+    type: "",
   });
 
   const [error, setError] = useState({
     name: false,
     email: false,
-    password: false
+    password: false,
+    type: false,
   })
 
   const handleNameError = () => {
@@ -101,16 +104,26 @@ const FacilityType = [
     }
   }
 
+  const handleFacilityTypeError = () => {
+    var facilityTypeformat = /^[a-zA-Z\s]*$/;
+    if (!state.facilityType.match(facilityTypeformat) && state.facilityType !== ""){
+        setError({...error, facilityType: true});
+        setShowFacilityTypeError(true);
+    }else {
+      setError({...error, facilityType: false});
+      setShowFacilityTypeError(false);
+    }
+  }
+
 
   useEffect(() => {
-    const { name, phone, email, password } = state;
-    if ( name === "" || phone === ""|| email === "" || password === "" || password.length < 1){
+    const { name, phone, email, password, type } = state;
+    if ( name === "" || phone === ""|| email === "" || password === "" || password.length < 1 || type === ""){
       setDisabled(true);
     }else{
       setDisabled(false);
     }
   },[state]);
-
 
 
   const handleSubmit = async(e) => {
@@ -195,11 +208,14 @@ const FacilityType = [
                 <TextField
                     select
                     required
-
                     label="Facility Type"
-                    value={type}
-                    onChange={handleChange}
+                    //value={type}
+                    // onChange={handleChange}
                     helperText="Please select your facility type"
+                    value={state.type}
+                    onChange={(e) => setState({...state, type: e.target.value})}
+                    onBlur={handleFacilityTypeError}
+                    onFocus={() => setShowFacilityTypeError(false)}
                     >
                     {FacilityType.map((option) => (
                         <MenuItem key={option.value} value={option.value}>
@@ -207,8 +223,9 @@ const FacilityType = [
                         </MenuItem>
                     ))}
                 </TextField>
-                   
-
+                <Typography color={'red'} sx={{ fontWeight: '400', fontSize: '15px' }}>
+                    {showFacilityTypeError && "Enter correct facility type"}
+                </Typography> 
             </Box>
 
             <Typography> 

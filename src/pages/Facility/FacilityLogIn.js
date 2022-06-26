@@ -14,13 +14,15 @@ const FacilityLogIn = () => {
 
   const [state, setState] = useState({
     email: "",
-    password: ""
+    password: "",
+    type: ""
   });
 
 
   const [error, setError] = useState({
     email: false,
-    password: false
+    password: false,
+    type: false
   })
 
 
@@ -49,7 +51,7 @@ const FacilityLogIn = () => {
 
 
   useEffect(() => {
-    const { email, password } = state;
+    const { email, password, type } = state;
     if (email === "" || password === "" || password.length < 1 || error.email){
       setDisabled(true);
     }else{
@@ -117,6 +119,16 @@ const FacilityLogIn = () => {
               <Typography color={'red'} sx={{ fontWeight: '400', fontSize: '15px' }}>
                     {showPasswordErrorText && "please enter a correct password"}
               </Typography>
+            </Box>
+            <Box>  
+              <TextField
+                id="standard-required"
+                label="type"
+                type="hidden"
+                variant="standard"
+                value= 'facility'
+                onChange={(e) => setState({...state, type: e.target.value})}
+              />
             </Box>
 
             <Typography> Do you have account ?
