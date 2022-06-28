@@ -23,27 +23,28 @@ const EmployeeLogIn = () => {
   const [showPasswordErrorText, setShowPasswordErrorText] = useState(false);
 
   const [state, setState] = useState({
-    email: "",
+    email_or_phone: "",
     password: "",
-    type: ""
+    type: "employee"
   });
 
 
   const [error, setError] = useState({
-    email: false,
+    email_or_phone: false,
     password: false, 
     type: false
   })
 
 
   const handleEmailError = () => {
-    var mailformat = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
-    if (!state.email.match(mailformat) && state.email !== ""){
-        setError({...error, email: true});
+    // var mailformat = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+    // if (!state.email.match(mailformat) && state.email !== ""){
+    if (state.email_or_phone.length < 1 && state.email_or_phone !== ""){
+        setError({...error, email_or_phone: true});
         setShowEmailErrorText(true);
 
     }else {
-      setError({...error, email: false});
+      setError({...error, email_or_phone: false});
       setShowEmailErrorText(false);
     }
   }
@@ -60,8 +61,8 @@ const EmployeeLogIn = () => {
   }
 
   useEffect(() => {
-    const { email, password, type } = state;
-    if (email === "" || password === "" || password.length < 1 || error.email){
+    const { email_or_phone, password, type } = state;
+    if (email_or_phone === "" || password === "" || password.length < 1 || error.email_or_phone){
       setDisabled(true);
     }else{
       setDisabled(false);
@@ -74,7 +75,7 @@ const EmployeeLogIn = () => {
      e.preventDefault();
 
       try{
-        const response = await axios.post("https://gadahealth-app.herokuapp.com/auth/login", state,
+        const response = await axios.post("http://gadahealth-app.herokuapp.com/auth/login/", state,
         {
           header:{ "Content-Type": "application/json"}    
         },
@@ -102,15 +103,15 @@ const EmployeeLogIn = () => {
               <TextField
                 required
                 id="standard-required"
-                label="Email"
+                label="Email or Phone number"
                 variant="standard"
-                value={state.email}
-                onChange={(e) => setState({...state, email: e.target.value})}
+                value={state.email_or_phone}
+                onChange={(e) => setState({...state, email_or_phone: e.target.value})}
                 onBlur={handleEmailError}
                 onFocus={() => setShowEmailErrorText(false)}
               />
               <Typography color={'red'} sx={{ fontWeight: '400', fontSize: '15px' }}>
-                {showEmailErrorText && "please enter a valid email"}
+                {showEmailErrorText && "please enter a valid email or phone number"}
               </Typography>
             </Box>
             
