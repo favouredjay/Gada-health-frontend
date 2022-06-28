@@ -3,8 +3,8 @@ import { Grid, Typography, Box, TextField, Button } from '@mui/material';
 import Navbar from '../../components/Navbar';
 import { Link, useNavigate } from 'react-router-dom';
 import axios from "axios";
-// import {cookieClient} from 'react-cookie'
 
+// import {cookieClient} from 'react-cookie'
 // let cookie = cookieClient.load('cookie-name')
 // if(cookie === undefined){
 //   axios.get('path/to/my/cookie/api').then(response => {
@@ -14,9 +14,7 @@ import axios from "axios";
 //   })
 // }
 
-
 const EmployeeLogIn = () => {
-
   const navigate = useNavigate();
   const [disabled, setDisabled] = useState(false);
   const [showEmailErrorText, setShowEmailErrorText] = useState(false);
