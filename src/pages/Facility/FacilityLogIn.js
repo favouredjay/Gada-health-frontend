@@ -91,7 +91,7 @@ const FacilityLogIn = () => {
               <TextField
                 required
                 id="standard-required"
-                label="Email"
+                label="Email or phone number"
                 variant="standard"
                 value={state.email_or_phone}
                 onChange={(e) => setState({...state, email_or_phone: e.target.value})}

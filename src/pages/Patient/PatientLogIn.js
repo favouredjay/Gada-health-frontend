@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react'
+import React, { useState, useEffect } from 'react'
 import { Grid, Typography, Box, TextField, Button } from '@mui/material';
 import Navbar from '../../components/Navbar';
 import { Link, useNavigate } from 'react-router-dom';
@@ -13,26 +13,25 @@ const PatientLogIn = () => {
   const [showPasswordErrorText, setShowPasswordErrorText] = useState(false);
 
   const [state, setState] = useState({
-    phone: "",
+    email_or_phone: "",
     password: "",
     type: ""
   });
 
 
   const [error, setError] = useState({
-    phone: false,
+    email_or_phone: false,
     password: false,
     type: false
   })
 
   const handlePhoneNumberError = () => {
-    var phoneformat = /^[0-9]+$/; 
-    if (!state.phone.match(phoneformat) && state.phone !== ""){
-        setError({...error, phone: true});
+    if (state.email_or_phone.length < 1 && state.email_or_phone !== ""){
+        setError({...error, email_or_phone: true});
         setShowPhoneNumberError(true);
 
     }else {
-      setError({...error, phone: false});
+      setError({...error, email_or_phone: false});
       setShowPhoneNumberError(false);
     }
   }
@@ -48,10 +47,9 @@ const PatientLogIn = () => {
     }
   }
 
-
   useEffect(() => {
-    const { phone, password, type } = state;
-    if (phone === "" || password === "" || password.length < 1){
+    const { email_or_phone, password, type } = state;
+    if (email_or_phone === "" || password === "" || password.length < 1){
       setDisabled(true);
     }else{
       setDisabled(false);
@@ -59,18 +57,17 @@ const PatientLogIn = () => {
   },[state, error]);
 
 
-
   const handleSubmit = async(e) => {
      e.preventDefault();
 
-      try{
-        const response = await axios.post("https://gadahealth-app.herokuapp.com/auth/login", state,
-        {
-          header:{ "Content-Type": "application/json"}    
-        },
-      )
+     try{
+      const response = await axios.post("http://gadahealth-app.herokuapp.com/auth/login/", state,
+      {
+        header:{ "Content-Type": "application/json"}    
+      },
+    )
 
-        if (response.status === 200){
+      if (response.status === 201){
           navigate("/Patient/Dashboard");
         }
       }catch(error){
@@ -90,11 +87,11 @@ const PatientLogIn = () => {
         <Box height=" 40px" width="340px" marginBottom='50px'>  
               <TextField
                 id="standard-required"
-                label="Phonenumber"
-                type="Phonenumber"
+                label="Email or Phonenumber"
+                type="email"
                 variant="standard"
-                value={state.phone}
-                onChange={(e) => setState({...state, phone: e.target.value})}
+                value={state.email_or_phone}
+                onChange={(e) => setState({...state, email_or_phone: e.target.value})}
                 onBlur={handlePhoneNumberError}
                 onFocus={() => setShowPhoneNumberError(false)}
               />
