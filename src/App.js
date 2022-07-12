@@ -17,10 +17,6 @@ import Branch from './pages/FacillityDashboard/Branch';
 import Employee from './pages/FacillityDashboard/Employee';
 import Profiles from './pages/FacillityDashboard/Profiles';
 
-
-
-
-
 function App() {
   
   return (
