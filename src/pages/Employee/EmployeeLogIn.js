@@ -3,23 +3,20 @@ import { Grid, Typography, Box, TextField, Button } from '@mui/material';
 import Navbar from '../../components/Navbar';
 import { Link, useNavigate } from 'react-router-dom';
 import axios from "axios";
-import {cookieClient} from 'react-cookie'
+// import {cookieClient} from 'react-cookie'
+
+  // let cookie = cookieClient.load('auth-token')
+  // if(cookie === undefined){
+  //     axios.get("http://gadahealth-app.herokuapp.com/auth/login/").then(response => {
+  //       if(response.status === 201){
+  //         cookieClient.save('auth-token', response.data.token, {path:'/'})
+  //   }
+  // })
+  // }
 
 
-
-
-let cookie = cookieClient.load('auth-token')
-if(cookie === undefined){
-    axios.get("http://gadahealth-app.herokuapp.com/auth/login/").then(response => {
-      if(response.status === 201){
-        cookieClient.save('auth-token', response.data.token, {path:'/'})
-  }
-})
-}
 
 const EmployeeLogIn = () => {
-
-
 
   const navigate = useNavigate();
   const [disabled, setDisabled] = useState(false);
