@@ -26,7 +26,7 @@ const FacilityLogIn = () => {
   const [state, setState] = useState({
     email_or_phone: "",
     password: "",
-    type: ""
+    type: "facility"
   });
 
 

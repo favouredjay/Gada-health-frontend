@@ -25,7 +25,7 @@ const PatientLogIn = () => {
   const [state, setState] = useState({
     email_or_phone: "",
     password: "",
-    type: ""
+    type: "patient"
   });
 
 
