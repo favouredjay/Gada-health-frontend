@@ -137,7 +137,7 @@ const FacilityType = [
         },
       )
 
-        if (response.status === 201){
+        if (response.status === 200){
           navigate("/Facility/LogIn");
         }
       }catch(error){

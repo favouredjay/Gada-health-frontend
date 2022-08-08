@@ -12,7 +12,7 @@ import PatientSignUp from '../src/pages/Patient/PatientSignUp'
 import PatientDashboard from './pages/PatientDashboard/PatientDashboard';
 import Appointments from './pages/PatientDashboard/Appointments';
 import Profile from './pages/PatientDashboard/Profile';
-import ShareRecord from './pages/PatientDashboard/ShareRecord';
+import Records from './pages/PatientDashboard/Records';
 import Branch from './pages/FacillityDashboard/Branch';
 import Employee from './pages/FacillityDashboard/Employee';
 import Profiles from './pages/FacillityDashboard/Profiles';
@@ -46,7 +46,7 @@ function App() {
         
               <Route path='/Patient/Dashboard/Appointments' element={<Appointments />} />
               <Route path='/Patient/Dashboard/Profile' element={<Profile />} />
-              <Route path='/Patient/Dashboard/ShareRecord' element={<ShareRecord />} />
+              <Route path='/Patient/Dashboard/Records' element={<Records />} />
 
         </Routes>
       </Router>

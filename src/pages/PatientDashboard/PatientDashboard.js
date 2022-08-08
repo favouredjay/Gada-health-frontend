@@ -18,8 +18,8 @@ const items = [
         link: '/Patient/Dashboard/Profile'
     },
     {
-        text: 'Share Record',
-        link: '/Patient/Dashboard/ShareRecord'
+        text: 'Record',
+        link: '/Patient/Dashboard/Records'
     },
     {
         text: 'Log Out',

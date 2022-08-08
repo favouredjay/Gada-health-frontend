@@ -81,7 +81,7 @@ const FacilityLogIn = () => {
       },
     )
 
-      if (response.status === 201){
+      if (response.status === 200){
           navigate("/Facility/Dashboard");
         }
       }catch(error){
@@ -141,19 +141,24 @@ const FacilityLogIn = () => {
               />
             </Box>
 
-            <Typography> Do you have account ?
-              <Link to='/Facility/Signup'>
-                 sign up   
-              </Link>
-
-           </Typography>
+            
 
               <Button disabled={disabled} onClick={(e) => handleSubmit(e)} height="40px" width="330px" padding="10px" variant="contained">
                   <Typography color="black">
                     Login
                   </Typography>
+
+               
                 
               </Button>
+
+
+              <Typography> Don't have an account?
+              <Link to='/Facility/Signup'>
+                 sign up   
+              </Link>
+
+           </Typography>
         </Box>
         
       </Grid>

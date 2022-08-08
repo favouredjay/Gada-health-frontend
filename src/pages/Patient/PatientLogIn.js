@@ -77,7 +77,7 @@ const PatientLogIn = () => {
       },
     )
 
-      if (response.status === 201){
+      if (response.status === 200){
           navigate("/Patient/Dashboard");
         }
       }catch(error){
@@ -138,12 +138,7 @@ const PatientLogIn = () => {
               />
             </Box>
 
-            <Typography> Do you have account ?
-              <Link to='/Patient/Signup'>
-                 sign up   
-              </Link>
-
-           </Typography>
+            
 
               <Button disabled={disabled} onClick={(e) => handleSubmit(e)} height="40px" width="330px" padding="10px" variant="contained">
                   <Typography color="black">
@@ -151,6 +146,12 @@ const PatientLogIn = () => {
                   </Typography>
                 
               </Button>
+              <Typography> Don't have an account?
+              <Link to='/Patient/Signup'>
+                 sign up   
+              </Link>
+
+           </Typography>
         </Box>
         
       </Grid>

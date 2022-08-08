@@ -188,6 +188,14 @@ import axios from 'axios';
               </Typography>
             </Box>
 
+            
+            
+            <Button disabled={disabled} onClick={(e) => handleSubmit(e)} height="40px" width="330px" padding="10px" variant="contained">
+              
+                  Sign Up
+                
+            </Button>
+
             <Typography> 
 
               Already a member ?
@@ -196,12 +204,6 @@ import axios from 'axios';
               </Link>
 
             </Typography>
-            
-            <Button disabled={disabled} onClick={(e) => handleSubmit(e)} height="40px" width="330px" padding="10px" variant="contained">
-              
-                  Sign Up
-                
-            </Button>
         </Box>
         
        

@@ -13,7 +13,7 @@ function Facility() {
         <Routes>
           <Route path='/Login' element={<FacilityLogIn />} />
           <Route path='/Signup' element={<FacilitySignUp />} />
-          {/* <Route path='/FacilityDashboard' element={<Facility />} /> */}
+          <Route path='/FacilityDashboard' element={<Facility />} />
         </Routes>
 
       {/* </Router> */}

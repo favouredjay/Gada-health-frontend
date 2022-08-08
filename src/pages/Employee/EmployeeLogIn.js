@@ -82,7 +82,7 @@ const EmployeeLogIn = () => {
         },
       )
 
-        if (response.status === 201){
+        if (response.status === 200){
           navigate("/Employee/Dashboard");
         }
       }catch(error){
@@ -143,12 +143,7 @@ const EmployeeLogIn = () => {
               />
             </Box>
 
-            <Typography> Do you have account ?
-              <Link to='/Employee/Signup'>
-                 sign up   
-              </Link>
-
-           </Typography>
+           
 
               <Button disabled={disabled} onClick={(e) => handleSubmit(e)} height="40px" width="330px" padding="10px" variant="contained">
                   <Typography color="black">
@@ -156,6 +151,13 @@ const EmployeeLogIn = () => {
                   </Typography>
                 
               </Button>
+
+              <Typography> Don't have an account?
+              <Link to='/Employee/Signup'>
+                 sign up   
+              </Link>
+
+           </Typography>
         </Box>
         
       </Grid>
